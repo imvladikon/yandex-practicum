@@ -5,7 +5,7 @@ import os
 import sys
 import subprocess
 
-def main(argv=None):
+def main():
     return_value = 0
     filename = sys.argv[1]
     dir_py = os.path.dirname(filename)
