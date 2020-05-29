@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# <div style="border:solid green 4px; padding: 20px">Hello! My critical comments are highlighted with <span style='color: red;'>red</span>,  less urgent remarks are in <span style='color: #ebd731;'>yellow</span>, recommendations and extra information - in <span style='color: green;'>green</span>.</div>
+
 # ## Exploratory data analysis
 
 # <div class="markdown markdown_size_normal markdown_type_theory theory-viewer__markdown theory-viewer__markdown_flexible big-theory theory-panel__big-theory"><div class="paragraph">You have files that contain the data retrieved with queries from the previous tasks. </div><div class="paragraph"><a href="https://code.s3.yandex.net/learning-materials/data-analyst-eng/project_sql_result_01.csv" target="_blank">/datasets/project_sql_result_01.csv</a> — the result of the first query. It contains the following data:</div><div class="paragraph"><em>company_name</em>: taxi company name</div><div class="paragraph"><em>trips_amount</em>: the number of rides for each taxi company on November 15-16, 2017. </div><div class="paragraph"><a href="https://code.s3.yandex.net/learning-materials/data-analyst-eng/project_sql_result_04.csv" target="_blank">/datasets/project_sql_result_04.csv</a> — the result of the second query. It contains the following data:</div><div class="paragraph"><em>dropoff_location_name</em>: Chicago neighborhoods where rides ended</div><div class="paragraph"><em>average_trips</em>: the average number of rides that ended in each neighborhood in November 2017. </div><div class="paragraph"> For these two datasets you now need to</div><ul><li>import the files</li><li>study the data they contain</li><li>make sure the data types are correct</li><li>identify the top 10 neighborhoods in terms of drop-offs</li><li>make graphs: taxi companies and number of rides, top 10 neighborhoods by number of dropoffs</li><li>draw conclusions based on each graph and explain the results</li></ul></div>
+
+# <div style="border:solid green 4px; padding: 20px">Always pleasant to see some description.</div>
 
 # In[33]:
 
@@ -92,6 +96,8 @@ def plt_nlargest_pie(df, column, index, title="", top=10):
 plt_nlargest_pie(trips_amount_df, column="trips_amount", index="company_name", title="taxi companies and number of rides")
 
 
+# <div style="border:solid green 4px; padding: 20px">Although I personally like barcharts over pies that is a pretty neat pie chart, I like it.</div>
+
 # As we could see, very popular was Flash Cab at November 15-16, 2017(Wednesday-Thursday), and the next one is Taxi Affiliation Services, and etc.  
 
 # In[103]:
@@ -120,6 +126,8 @@ sns.set_color_codes("muted")
 plt.title("Distribution of average_trips per top 20 neighborhoods and others")
 plt.show()
 
+
+# <div style="border:solid green 4px; padding: 20px">Grouping small values into unified bar is always a good idea. Strictly speaking, there is no need in setting any color scheme to that chart, you don't encode any other variable in your colors, your values already expressed by the length of bars.</div>
 
 # ## Testing hypotheses
 
@@ -161,6 +169,8 @@ sns.distplot(rides_df["duration_seconds"], bins=list(range(100, 4000, 200)))
 
 sns.boxplot(rides_df["duration_seconds"])
 
+
+# <div style="border:solid green 4px; padding: 20px">Good use of seaborn to look into distribution.</div>
 
 # In[110]:
 
@@ -206,6 +216,8 @@ alpha = .05
 # 
 # we will test by avg value and after that also will check both avg values
 
+# <div style="border:solid green 4px; padding: 20px">Hypotheses are stated correctly.</div>
+
 # In[147]:
 
 
@@ -227,3 +239,5 @@ print("checking:")
 print(f"bad weather, mean={saturdays_bad_rides.mean():.2f}")
 print(f"good weather, mean={saturdays_good_rides.mean():.2f}")
 
+
+# <div style="border:solid green 4px; padding: 20px">Okay, I am glad that now we could draw conclusions from the results of our SQL queries. Keep up the good work, see you!</div>

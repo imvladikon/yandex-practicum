@@ -13077,6 +13077,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Hello! My critical comments are highlighted with <span style='color: red;'>red</span>,  less urgent remarks are in <span style='color: #ebd731;'>yellow</span>, recommendations and extra information - in <span style='color: green;'>green</span>.</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis">&#182;</a></h2>
 </div>
 </div>
@@ -13085,6 +13092,13 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="markdown markdown_size_normal markdown_type_theory theory-viewer__markdown theory-viewer__markdown_flexible big-theory theory-panel__big-theory"><div class="paragraph">You have files that contain the data retrieved with queries from the previous tasks. </div><div class="paragraph"><a href="https://code.s3.yandex.net/learning-materials/data-analyst-eng/project_sql_result_01.csv" target="_blank">/datasets/project_sql_result_01.csv</a> — the result of the first query. It contains the following data:</div><div class="paragraph"><em>company_name</em>: taxi company name</div><div class="paragraph"><em>trips_amount</em>: the number of rides for each taxi company on November 15-16, 2017. </div><div class="paragraph"><a href="https://code.s3.yandex.net/learning-materials/data-analyst-eng/project_sql_result_04.csv" target="_blank">/datasets/project_sql_result_04.csv</a> — the result of the second query. It contains the following data:</div><div class="paragraph"><em>dropoff_location_name</em>: Chicago neighborhoods where rides ended</div><div class="paragraph"><em>average_trips</em>: the average number of rides that ended in each neighborhood in November 2017. </div><div class="paragraph"> For these two datasets you now need to</div><ul><li>import the files</li><li>study the data they contain</li><li>make sure the data types are correct</li><li>identify the top 10 neighborhoods in terms of drop-offs</li><li>make graphs: taxi companies and number of rides, top 10 neighborhoods by number of dropoffs</li><li>draw conclusions based on each graph and explain the results</li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Always pleasant to see some description.</div>
 </div>
 </div>
 </div>
@@ -13562,6 +13576,13 @@ dtype: int64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Although I personally like barcharts over pies that is a pretty neat pie chart, I like it.</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>As we could see, very popular was Flash Cab at November 15-16, 2017(Wednesday-Thursday), and the next one is Taxi Affiliation Services, and etc.</p>
 
 </div>
@@ -13664,6 +13685,13 @@ dtype: int64</pre>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Grouping small values into unified bar is always a good idea. Strictly speaking, there is no need in setting any color scheme to that chart, you don't encode any other variable in your colors, your values already expressed by the length of bars.</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13926,6 +13954,13 @@ dtype: int64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Good use of seaborn to look into distribution.</div>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[110]:</div>
@@ -14055,6 +14090,13 @@ dtype: int64</pre>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Hypotheses are stated correctly.</div>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[147]:</div>
@@ -14082,8 +14124,8 @@ dtype: int64</pre>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">H_0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;checking:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bad weather, mean={saturdays_bad_rides.mean():.2f}&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;good weather, mean={saturdays_good_rides.mean():.2f}&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bad weather, mean=</span><span class="si">{</span><span class="n">saturdays_bad_rides</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;good weather, mean=</span><span class="si">{</span><span class="n">saturdays_good_rides</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14112,6 +14154,13 @@ good weather, mean=1999.68
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="border:solid green 4px; padding: 20px">Okay, I am glad that now we could draw conclusions from the results of our SQL queries. Keep up the good work, see you!</div>
+</div>
+</div>
 </div>
     </div>
   </div>
