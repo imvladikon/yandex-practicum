@@ -1,6 +1,26 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# ## Review
+# 
+# Hi Vladimir. This is Soslan again :). As always I've added all my comments to new cells with different coloring.
+# 
+# <div class="alert alert-success" role="alert">
+#   If you did something great I'm using green color for my comment
+# </div>
+# 
+# <div class="alert alert-warning" role="alert">
+# If I want to give you advice or think that something can be improved, then I'll use yellow. This is an optional recommendation.
+# </div>
+# 
+# <div class="alert alert-danger" role="alert">
+#   If the topic requires some extra work so I can accept it then the color will be red
+# </div>
+# 
+# You did a good project. Nice chart, good structured easy to read code, helper functions. Everything is OK. I have just one remark about using cross-validation with upsampling. But because your final score is good enough, I can accept your project. Just have a look at my comments. Good luck.
+# 
+# ---
+
 # ## Project description
 
 # <div class="paragraph">Beta Bank customers are leaving: little by little, chipping away every month. The bankers figured out it’s cheaper to save the existing customers rather than to attract new ones.</div><div class="paragraph">We need to predict whether a customer will leave the bank soon. You have the data on clients’ past behavior and termination of contracts with the bank.</div><div class="paragraph">Build a model with the maximum possible <em>F1</em> score. To pass the project, you need an <em>F1</em> score of at least 0.59. Check the <em>F1</em> for the test set.</div><div class="paragraph">Additionally, measure the <em>AUC-ROC</em> metric and compare it with the <em>F1</em>.</div></div>
@@ -9,13 +29,13 @@
 
 # <div class="markdown markdown_size_normal markdown_type_theory"><strong>Features</strong><ul><li><em>RowNumber</em> — data string index</li><li><em>CustomerId</em> — unique customer identifier</li><li><em>Surname</em> — surname</li><li><em>CreditScore</em> — credit score</li><li><em>Geography</em> — country of residence</li><li><em>Gender</em> — gender</li><li><em>Age</em> — age</li><li><em>Tenure</em> — period of maturation for a customer’s fixed deposit (years)</li><li><em>Balance</em> — account balance</li><li><em>NumOfProducts</em> — number of banking products used by the customer</li><li><em>HasCrCard</em> — customer has a credit card</li><li><em>IsActiveMember</em> — customer’s activeness</li><li><em>EstimatedSalary</em> — estimated salary</li></ul><div class="paragraph"><strong>Target</strong></div><ul><li><em>Exited</em> — сustomer has left</li></ul></div>
 
-# In[201]:
+# In[117]:
 
 
 get_ipython().system('pip install catboost -q')
 
 
-# In[202]:
+# In[118]:
 
 
 import pandas as pd
@@ -42,14 +62,14 @@ logger = logging.getLogger()
 logger.setLevel(logging.CRITICAL)
 
 
-# In[203]:
+# In[119]:
 
 
 def display_classification_report(y_true, y_pred):
     display(pd.DataFrame(classification_report(y_test, y_pred, output_dict=True)).T)
 
 
-# In[204]:
+# In[120]:
 
 
 def plot_roc(y_test, preds, ax=None, label='model'):
@@ -96,7 +116,7 @@ def plot_pr(y_test, preds, ax=None, label='model'):
         return ax
 
 
-# In[205]:
+# In[121]:
 
 
 #missing value ratio
@@ -136,19 +156,22 @@ def describe_full(df, target_name=""):
     return data_describe
 
 
-# In[206]:
+# <div class="alert alert-success" role="alert">
+# Great, nice helper functions</div>
+
+# In[122]:
 
 
 df = pd.read_csv('https://code.s3.yandex.net/datasets/Churn.csv')
 
 
-# In[207]:
+# In[123]:
 
 
 df = shuffle(df, random_state=42)
 
 
-# In[208]:
+# In[124]:
 
 
 features = ['CreditScore', 'Geography','Gender', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard',
@@ -156,62 +179,62 @@ features = ['CreditScore', 'Geography','Gender', 'Age', 'Tenure', 'Balance', 'Nu
 target = 'Exited'
 
 
-# In[209]:
+# In[125]:
 
 
 df.info()
 
 
-# In[210]:
+# In[126]:
 
 
 df.head()
 
 
-# In[211]:
+# In[127]:
 
 
 df['Gender'] = (df['Gender']=='Female').astype(int)
 
 
-# In[212]:
+# In[128]:
 
 
 df.isna().sum()
 
 
-# In[213]:
+# In[129]:
 
 
 df = df.drop(['RowNumber'], axis=1)
 
 
-# In[214]:
+# In[130]:
 
 
 le_geo = LabelEncoder()
 df['Geography'] = le_geo.fit_transform(df['Geography'])
 
 
-# In[215]:
+# In[131]:
 
 
 len(df['Surname'].unique())
 
 
-# In[216]:
+# In[132]:
 
 
 df = df.drop(['CustomerId', 'Surname'], axis=1)
 
 
-# In[217]:
+# In[133]:
 
 
 df[df['Tenure'].isna()]
 
 
-# In[218]:
+# In[134]:
 
 
 df[df['Tenure'].isna()][target].value_counts()
@@ -221,7 +244,7 @@ df[df['Tenure'].isna()][target].value_counts()
 
 # let's impute it, using linear regression (without label for avoiding leakage)
 
-# In[219]:
+# In[135]:
 
 
 parameters = set(df.columns) - set([target, 'Tenure'])
@@ -236,37 +259,40 @@ y_pred = lr.predict(X_val).astype(int)
 mean_squared_error(y_val, y_pred)
 
 
-# In[220]:
+# <div class="alert alert-success" role="alert">
+# Good solution</div>
+
+# In[136]:
 
 
 df.loc[df['Tenure'].isna(), 'Tenure'] = lr.predict(X_test).astype(int)
 
 
-# In[221]:
+# In[137]:
 
 
 df['Tenure'] = df['Tenure'].astype(int)
 
 
-# In[222]:
+# In[138]:
 
 
 describe_full(df, target)
 
 
-# In[223]:
+# In[139]:
 
 
 sns.boxplot(df['EstimatedSalary'])
 
 
-# In[224]:
+# In[140]:
 
 
 sns.boxplot(df['Balance'])
 
 
-# In[225]:
+# In[141]:
 
 
 sns.distplot(df['Balance'])
@@ -274,7 +300,7 @@ sns.distplot(df['Balance'])
 
 # Let's see most important features
 
-# In[226]:
+# In[142]:
 
 
 X, y = df[features].values,df[target].values
@@ -287,14 +313,14 @@ sns.barplot(data=df_feature_importances, x=df_feature_importances["coeff"], y=df
 
 # features sorted by importance
 
-# In[192]:
+# In[143]:
 
 
 features = list(df_feature_importances["feature"])
 features
 
 
-# In[193]:
+# In[144]:
 
 
 del X, y, X_test, y_test, X_train, y_train, X_val, y_val
@@ -306,15 +332,18 @@ del X, y, X_test, y_test, X_train, y_train, X_val, y_val
 #  'Tenure','IsActiveMember','Geography','Gender','HasCrCard'.
 #  Our target is 'Exited'. Also we have Balance, EstimatedSalary and good questiong what is meause of those columns(we could infer it from column of Geography, if it's Europe probably it's euro). Also some data was missed at Tenure column, but using some simplistic model (linear regression) we imputed it. 
 
+# <div class="alert alert-success" role="alert">
+# Excellent data analysis and preparation.</div>
+
 # ### 2. Examine the balance of classes. Train the model without taking into account the imbalance. Briefly describe your findings.
 
-# In[194]:
+# In[145]:
 
 
 sns.countplot(df[target])
 
 
-# In[195]:
+# In[146]:
 
 
 display(df[target].value_counts())
@@ -325,38 +354,41 @@ display(df[target].value_counts())
 
 # #### Logistic regresion
 
-# In[196]:
+# In[147]:
 
 
 history = dict()
 
 
-# In[197]:
+# In[148]:
 
 
 X, y = df[features].values, df[target].values
 
 
-# In[198]:
+# <div class="alert alert-warning" role="alert">
+# You could also scale your numeric features.</div>
+
+# In[149]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 
-# In[199]:
+# In[150]:
 
 
 lr = LogisticRegressionCV(cv=5, random_state=42).fit(X_train, y_train)
 y_pred = lr.predict(X_test)
 
 
-# In[200]:
+# In[151]:
 
 
 display_classification_report(y_test, y_pred)
 
 
-# In[227]:
+# In[152]:
 
 
 #as we saw in the table, for f1 we got very bad result
@@ -364,7 +396,7 @@ history['linear_imbalanced'] = f1_score(y_test, y_pred)
 f1_score(y_test, y_pred)
 
 
-# In[228]:
+# In[153]:
 
 
 fig, ax = plt.subplots(1,2, figsize=(8,4))
@@ -373,7 +405,10 @@ plot_pr(y_test, y_pred, ax=ax[0],label="LogisticRegressionCV")
 plot_roc(y_test, y_pred, ax=ax[1],label="LogisticRegressionCV")
 
 
-# In[229]:
+# <div class="alert alert-success" role="alert">
+# Nice charts</div>
+
+# In[154]:
 
 
 lrcv = LogisticRegressionCV(
@@ -396,7 +431,7 @@ plot_roc(y_test, y_pred, ax=axs[1], label="LogisticRegressionCV")
 
 # #### DecisionTreeClassifier
 
-# In[230]:
+# In[155]:
 
 
 params = {
@@ -412,13 +447,13 @@ print(confusion_matrix(y_test, y_pred))
 display_classification_report(y_test, y_pred)
 
 
-# In[231]:
+# In[156]:
 
 
 f1_score(y_test, y_pred)
 
 
-# In[232]:
+# In[157]:
 
 
 dt = DecisionTreeClassifier(**clf.best_params_).fit(X_train, y_train)
@@ -434,7 +469,7 @@ plot_pr(y_test, y_pred, ax=axs[0], label="DecisionTreeClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="DecisionTreeClassifier")
 
 
-# In[233]:
+# In[158]:
 
 
 history['desicion_tree_imbalanced'] = f1_score(y_test, y_pred)
@@ -443,7 +478,7 @@ f1_score(y_test, y_pred)
 
 # #### CatBoostClassifier
 
-# In[234]:
+# In[159]:
 
 
 cb = CatBoostClassifier(verbose=0, random_state=42).fit(X_train, y_train)
@@ -459,18 +494,21 @@ plot_pr(y_test, y_pred, ax=axs[0], label="CatBoostClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="CatBoostClassifier")
 
 
-# In[235]:
+# In[160]:
 
 
 history['catboost_imbalanced'] = f1_score(y_test, y_pred)
 f1_score(y_test, y_pred)
 
 
+# <div class="alert alert-success" role="alert">
+# Good research of models without balancing.</div>
+
 # ### 3. Improve the quality of the model. Make sure you use at least two approaches to fixing class imbalance. Use the training set to pick the best parameters. Train different models on training and validation sets. Find the best one. Briefly describe your findings.
 
 # ### Linear regression
 
-# In[236]:
+# In[161]:
 
 
 lrcv = LogisticRegressionCV(
@@ -489,7 +527,7 @@ plot_pr(y_test, y_pred, ax=axs[0], label="LogisticRegressionCV")
 plot_roc(y_test, y_pred, ax=axs[1], label="LogisticRegressionCV")
 
 
-# In[237]:
+# In[162]:
 
 
 history['linear'] = f1_score(y_test, y_pred)
@@ -500,7 +538,7 @@ f1_score(y_test, y_pred)
 
 # ### DecisionTreeClassifier
 
-# In[238]:
+# In[163]:
 
 
 params = {
@@ -517,7 +555,7 @@ print(confusion_matrix(y_test, y_pred))
 display_classification_report(y_test, y_pred)
 
 
-# In[239]:
+# In[164]:
 
 
 dt = DecisionTreeClassifier(**clf.best_params_).fit(X_train, y_train)
@@ -533,7 +571,7 @@ plot_pr(y_test, y_pred, ax=axs[0], label="DecisionTreeClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="DecisionTreeClassifier")
 
 
-# In[240]:
+# In[165]:
 
 
 history['desicion_tree'] = f1_score(y_test, y_pred)
@@ -542,13 +580,13 @@ f1_score(y_test, y_pred)
 
 # ### CatBoost
 
-# In[241]:
+# In[166]:
 
 
 scale_pos_weight=(y_train==0).sum()/(y_train==1).sum()
 
 
-# In[242]:
+# In[167]:
 
 
 cb = CatBoostClassifier(verbose=0, scale_pos_weight=scale_pos_weight,random_state=42).fit(X_train, y_train)
@@ -564,14 +602,14 @@ plot_pr(y_test, y_pred, ax=axs[0], label="CatBoostClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="CatBoostClassifier")
 
 
-# In[243]:
+# In[168]:
 
 
 history['catboost'] = f1_score(y_test, y_pred)
 f1_score(y_test, y_pred)
 
 
-# In[244]:
+# In[169]:
 
 
 history
@@ -579,11 +617,22 @@ history
 
 # as we could see, we improved f1 metrics using weigths balancing technics
 
+# <div class="alert alert-success" role="alert">
+# Correct</div>
+# 
+
 # ## Oversampling
 
 # we also could use imblearn package but let's do it from scratch
 
-# In[245]:
+# <div class="alert alert-warning" role="alert">
+# Using CV with upsampling/downsampling also required the custom realization of cross-validation. In case of default cross-validation you feed to CV balanced train set and only then model split it into train and validation parts. So your validation set is also balanced while you should choose a best model on unbalanced set as the nature of your data is such.</div>
+# 
+# Here an interesting article about it: https://kiwidamien.github.io/how-to-do-cross-validation-when-upsampling-data.html
+# 
+# ---
+
+# In[170]:
 
 
 def oversampling(features, target, repeat):
@@ -601,7 +650,7 @@ def oversampling(features, target, repeat):
   return features_resampled, target_resampled
 
 
-# In[246]:
+# In[171]:
 
 
 print((y_train==0).sum())
@@ -609,13 +658,13 @@ print((y_train==1).sum())
 print((y_train==0).sum()//(y_train==1).sum())
 
 
-# In[247]:
+# In[172]:
 
 
 X_resampled, y_resampled = oversampling(X_train, y_train, repeat=4)
 
 
-# In[248]:
+# In[173]:
 
 
 print((y_resampled==0).sum())
@@ -625,7 +674,7 @@ print((y_resampled==0).sum()//(y_resampled==1).sum())
 
 # ### Logisticregression
 
-# In[249]:
+# In[174]:
 
 
 lrcv = LogisticRegressionCV(
@@ -644,7 +693,7 @@ plot_pr(y_test, y_pred, ax=axs[0], label="LogisticRegressionCV")
 plot_roc(y_test, y_pred, ax=axs[1], label="LogisticRegressionCV")
 
 
-# In[250]:
+# In[175]:
 
 
 print(f'without balancing={history["linear_imbalanced"]:.2f}')
@@ -654,7 +703,13 @@ print(f'using oversampling={f1_score(y_test, y_pred):.2f}')
 
 # ### DecisionTreeClassifier
 
-# In[251]:
+# In[176]:
+
+
+clf.best_score_
+
+
+# In[177]:
 
 
 params = {
@@ -670,7 +725,7 @@ print(confusion_matrix(y_test, y_pred))
 display_classification_report(y_test, y_pred)
 
 
-# In[252]:
+# In[178]:
 
 
 dt = DecisionTreeClassifier(**clf.best_params_).fit(X_resampled, y_resampled)
@@ -686,7 +741,7 @@ plot_pr(y_test, y_pred, ax=axs[0], label="DecisionTreeClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="DecisionTreeClassifier")
 
 
-# In[253]:
+# In[179]:
 
 
 print(f'without balancing={history["desicion_tree_imbalanced"]:.2f}')
@@ -697,7 +752,7 @@ print(f'using oversampling={f1_score(y_test, y_pred):.2f}')
 # ### CatBoost
 # 
 
-# In[254]:
+# In[180]:
 
 
 cb = CatBoostClassifier(verbose=0, random_state=42).fit(X_resampled, y_resampled)
@@ -713,7 +768,7 @@ plot_pr(y_test, y_pred, ax=axs[0], label="CatBoostClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="CatBoostClassifier")
 
 
-# In[255]:
+# In[181]:
 
 
 print(f'without balancing={history["catboost_imbalanced"]:.2f}')
@@ -721,13 +776,16 @@ print(f'with balancing={history["catboost"]:.2f}')
 print(f'using oversampling={f1_score(y_test, y_pred):.2f}')
 
 
+# <div class="alert alert-success" role="alert">
+# Overall good third step but with keeping in mind a thougth about cv over balancing.</div>
+
 # also we could use undersampling
 
 # ### 4. Perform the final testing.
 
 # best result we've got using CatBoost, using class weights balancing
 
-# In[256]:
+# In[183]:
 
 
 cb = CatBoostClassifier(verbose=0, scale_pos_weight=scale_pos_weight,random_state=42).fit(X_train, y_train)
@@ -742,5 +800,8 @@ axs = axs.ravel()
 plot_pr(y_test, y_pred, ax=axs[0], label="CatBoostClassifier")
 plot_roc(y_test, y_pred, ax=axs[1], label="CatBoostClassifier")
 
+
+# <div class="alert alert-success" role="alert">
+# Final test was done correctly.</div>
 
 # <div class="markdown markdown_size_normal markdown_type_theory"><h1>Project evaluation</h1><div class="paragraph">We’ve put together the evaluation criteria for the project. Read this carefully before moving on to the task.</div><div class="paragraph">Here’s what the reviewers will look at when reviewing your project:</div><ul><li>How did you prepare the data for training? Have you processed all of the feature types?</li><li>Have you explained the preprocessing steps well enough?</li><li>How did you investigate the balance of classes?</li><li>Did you study the model without taking into account the imbalance of classes?</li><li>What are your findings about the task research?</li><li>Have you correctly split the data into sets?</li><li>How have you worked with the imbalance of classes?</li><li>Did you use at least two techniques for imbalance fixing?</li><li>Have you performed the model training, validation, and final testing correctly?</li><li>How high is your <em>F1</em> score?</li><li>Did you examine the <em>AUC-ROC</em> values?</li><li>Have you kept to the project structure and kept the code neat?</li></ul></div>
