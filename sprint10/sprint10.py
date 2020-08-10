@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# <div class="alert alert-success">
+#     Hi! I'm glad to say that you project has been accepted and now you can move on to the next sprint! Keep up the good work!
+# </div>
+
 # # Review
 # Hi, my name is Dmitry and I will be reviewing your project.
 # 
