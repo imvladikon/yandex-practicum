@@ -477,18 +477,6 @@ def revenue(target, predicted, count):
     return target[indices][:count].sum() * income_per_volume - budget_total
 
 
-# In[54]:
-
-
-def revenue(target, predicted, well_count):
-    predicted_sorted = predicted.sort_values(ascending=False)
-    selected = target[predicted_sorted.index][:well_count]
-    return selected.sum() * income_per_volume - budget_total
-
-
-# <div class="alert alert-warning" role="alert">
-# You have two functions with the same name here. It is better to delete unused one.</div>
-
 # # 5. Calculate risks and profit for each region:
 
 # ## 5.1 Use the bootstrapping technique with 1000 samples to find the distribution of profit.
