@@ -13077,9 +13077,124 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Review">Review<a class="anchor-link" href="#Review">&#182;</a></h2><p>Hi Vladimir. Soslan is here. As always, I've added all my comments to new cells with different coloring.</p>
+<div class="alert alert-success" role="alert">
+  If you did something great I'm using green color for my comment
+</div><div class="alert alert-warning" role="alert">
+If I want to give you advice or think that something can be improved, then I'll use yellow. This is an optional recommendation.
+</div><div class="alert alert-danger" role="alert">
+  If the topic requires some extra work so I can accept it then the color will be red
+</div><p>You did a nice project. All steps are correct. So, I'm accepting your project. Thank you for your work.</p>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>The Sure Tomorrow insurance company wants to protect its clients' data. Your task is to develop a data transforming algorithm that would make it hard to recover personal information from the transformed data. Prove that the algorithm works correctly</p>
 <p>The data should be protected in such a way that the quality of machine learning models doesn't suffer. You don't need to pick the best model.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%writefile</span> requirements.txt 
+<span class="n">watermark</span>
+<span class="n">ipython</span><span class="o">-</span><span class="n">autotime</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Writing requirements.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -r requirements.txt -qq
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">load_ext</span> autotime
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">watermark</span> -p numpy,scipy,sklearn,seaborn -g
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 486 µs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="alert alert-warning" role="alert">
+I didn't execute upper cells.</div>
 </div>
 </div>
 </div>
@@ -13092,16 +13207,764 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">statsmodels.regression.linear_model</span> <span class="kn">import</span> <span class="n">OLS</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 103 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">seed_value</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 952 µs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#missing value ratio</span>
+<span class="k">def</span> <span class="nf">missing_values</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df_nulls</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df_nulls</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">,</span><span class="s2">&quot;count&quot;</span><span class="p">,</span><span class="s2">&quot;missing_ratio&quot;</span><span class="p">]</span>
+    <span class="n">df_nulls</span><span class="o">=</span><span class="n">df_nulls</span><span class="p">[</span><span class="n">df_nulls</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df_nulls</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;missing_ratio&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_nulls</span>
+
+<span class="c1">#outliers by 3 sigma rule</span>
+<span class="k">def</span> <span class="nf">outlier</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">data_mean</span><span class="p">,</span> <span class="n">data_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">cut_off</span> <span class="o">=</span> <span class="n">data_std</span> <span class="o">*</span> <span class="mi">3</span>
+    <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">data_mean</span> <span class="o">-</span> <span class="n">cut_off</span><span class="p">,</span> <span class="n">data_mean</span> <span class="o">+</span> <span class="n">cut_off</span>
+    <span class="n">outliers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">lower</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">]</span>
+    <span class="n">outliers_removed</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">lower</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span>
+
+<span class="c1"># full description statistics </span>
+<span class="k">def</span> <span class="nf">describe_full</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="n">data_describe</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">df_numeric</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">_get_numeric_data</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">target_name</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">corr_with_target</span><span class="o">=</span><span class="n">df_numeric</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">df_numeric</span><span class="p">[</span><span class="n">target_name</span><span class="p">]))</span>
+        <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;corr_with_target&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">corr_with_target</span>
+    <span class="n">dtype_df</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">dtypes</span>
+    <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;dtypes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dtype_df</span>
+    <span class="n">data_null</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;Missing %&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_null</span>
+    <span class="n">Cardinality</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">nunique</span><span class="p">)</span>
+    <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;Cardinality&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cardinality</span>
+    <span class="n">df_skew</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;Skew&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_skew</span>
+    <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;outliers&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">outlier</span><span class="p">(</span><span class="n">df_numeric</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">data_describe</span><span class="p">[</span><span class="s1">&#39;kurtosis&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df_numeric</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data_describe</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 5 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://code.s3.yandex.net/datasets/insurance_us.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 168 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">describe_full</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>dtypes</th>
+      <th>Missing %</th>
+      <th>Cardinality</th>
+      <th>Skew</th>
+      <th>outliers</th>
+      <th>kurtosis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Gender</td>
+      <td>5000.0</td>
+      <td>0.4990</td>
+      <td>0.500049</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>int64</td>
+      <td>0.0</td>
+      <td>2</td>
+      <td>0.004001</td>
+      <td>0</td>
+      <td>-2.000784</td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>5000.0</td>
+      <td>30.9528</td>
+      <td>8.440807</td>
+      <td>18.0</td>
+      <td>24.0</td>
+      <td>30.0</td>
+      <td>37.0</td>
+      <td>65.0</td>
+      <td>float64</td>
+      <td>0.0</td>
+      <td>46</td>
+      <td>0.515148</td>
+      <td>12</td>
+      <td>-0.297665</td>
+    </tr>
+    <tr>
+      <td>Salary</td>
+      <td>5000.0</td>
+      <td>39916.3600</td>
+      <td>9900.083569</td>
+      <td>5300.0</td>
+      <td>33300.0</td>
+      <td>40200.0</td>
+      <td>46600.0</td>
+      <td>79000.0</td>
+      <td>float64</td>
+      <td>0.0</td>
+      <td>524</td>
+      <td>-0.036723</td>
+      <td>14</td>
+      <td>0.021468</td>
+    </tr>
+    <tr>
+      <td>Family members</td>
+      <td>5000.0</td>
+      <td>1.1942</td>
+      <td>1.091387</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>6.0</td>
+      <td>int64</td>
+      <td>0.0</td>
+      <td>7</td>
+      <td>0.898297</td>
+      <td>39</td>
+      <td>0.715275</td>
+    </tr>
+    <tr>
+      <td>Insurance benefits</td>
+      <td>5000.0</td>
+      <td>0.1480</td>
+      <td>0.463183</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>int64</td>
+      <td>0.0</td>
+      <td>6</td>
+      <td>3.845707</td>
+      <td>141</td>
+      <td>18.163968</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 96.4 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 5000 entries, 0 to 4999
+Data columns (total 5 columns):
+Gender                5000 non-null int64
+Age                   5000 non-null float64
+Salary                5000 non-null float64
+Family members        5000 non-null int64
+Insurance benefits    5000 non-null int64
+dtypes: float64(2), int64(3)
+memory usage: 195.4 KB
+time: 5.92 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Gender                0
+Age                   0
+Salary                0
+Family members        0
+Insurance benefits    0
+dtype: int64</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 5.78 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Salary</th>
+      <th>Family members</th>
+      <th>Insurance benefits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>41.0</td>
+      <td>49600.0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>46.0</td>
+      <td>38000.0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0</td>
+      <td>29.0</td>
+      <td>21000.0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0</td>
+      <td>21.0</td>
+      <td>41700.0</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>1</td>
+      <td>28.0</td>
+      <td>26100.0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 9.38 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 7.55 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int64&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 2.73 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Salary&#39;</span><span class="p">,</span> <span class="s1">&#39;Family members&#39;</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;Insurance benefits&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 690 µs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0, 1, 2, 3, 5, 4])</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 3.68 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>most important features by</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="n">rfc</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rfc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">df_feature_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(((</span><span class="nb">zip</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">rfc</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">))))</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;coeff&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;coeff&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_feature_importances</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">df_feature_importances</span><span class="p">[</span><span class="s2">&quot;coeff&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df_feature_importances</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fe919e35850&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 233 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="alert alert-success" role="alert">
+Good start. Data was opened and examined correctly.</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13158,9 +14021,24 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Answer:</strong> ...</p>
-<p><strong> Justification:</strong> ...</p>
+<p>Our main goal is depersonalized data(and sub-goal is min distance between Xw and y as linear regression task). According:</p>
+<p>$X'=Xs$</p>
+<p>$w = (X^T X)^{-1} X^T y$</p>
+<p>$w' = (X'^T X')^{-1} X'^T y = ((Xs)^{T}(Xs))^{-1}(Xs)^{T}y = (s^{T}X^{T}Xs)^{-1}s^{T}X^{T}y = s^{-1}(X^{T}X)^{-1}s^{T^{-1}}s^{T}X^{T}y$, where s - random salt and $(s^T)^{-1}s^{T} = E$</p>
+<p>therefore:
+$w'=s^{-1}(X^{T}X)^{-1}s^{T^{-1}}s^{T}X^{T}y=s^{-1}w$<br>
+and finally:
+$a'= Xsw' = Xss^{-1}w = XEw = Xw = a$</p>
+<p>QED</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="alert alert-success" role="alert">
+Excellent. The proof is clear and mathematically rigorous.</div>
 </div>
 </div>
 </div>
@@ -13174,8 +14052,8 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Algorithm</strong></p>
-<p>...</p>
+<p>$X_s = XS$,</p>
+<p>$X = X_sS^{-1}$</p>
 
 </div>
 </div>
@@ -13183,11 +14061,193 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Justification</strong></p>
-<p>...</p>
+<p>Let's check it on our data</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(9982.134413038993, 17975.984686392443)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 3.78 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coeff_var</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">/</span><span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">coeff_var</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.5553039005754896</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 3.67 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">mu</span><span class="o">/</span><span class="n">coeff_var</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[-151,  237,  226,  425],
+       [  -6,    8,   -4, -100],
+       [-559,  409,  373, -263],
+       [  34,  -50,  -40, -430]])</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 4.25 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">s</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">s</span><span class="p">)),</span> <span class="n">X</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 33.9 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13198,16 +14258,345 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LinearRegressionImpl</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">X</span><span class="p">))</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w0</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="bp">self</span>
+ 
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">X</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">w0</span>     
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 1.73 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>numpy based implementation without random salt:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegressionImpl</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$R_2=</span><span class="si">{}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$\displaystyle R_2=0.4392664167749786$
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 106 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>numpy based implementation with random salt:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coeff_var</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">/</span><span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">mu</span><span class="o">/</span><span class="n">coeff_var</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 2.08 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_s</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@s</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 912 µs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegressionImpl</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$R_2=</span><span class="si">{}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$\displaystyle R_2=0.43926640764514546$
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 172 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>sklearn LR without random salt:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$R_2=</span><span class="si">{}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$\displaystyle R_2=0.43926641677498457$
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 194 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>sklearn LR with random salt:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed_value</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$R_2=</span><span class="si">{}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$\displaystyle R_2=0.43926641677544753$
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>time: 80.2 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>as we see, we proved our transformation algorithm and also checked it on linear regression model, all of the results($R_2$) are pretty equal</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="alert alert-success" role="alert">
+Algo and testing are correct.</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13254,7 +14643,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span> 
