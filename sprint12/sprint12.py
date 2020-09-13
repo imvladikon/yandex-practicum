@@ -1,6 +1,31 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+#  Hello **Vladimir**, my name is **Lyuman** and I'm going to review your project!
+# 
+# You can find my comments in <font color='green'>green</font>, <font color='blue'>blue</font> or <font color='red'>red</font> boxes like this:
+# 
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> if everything is done succesfully
+# </div>
+# 
+# <div class="alert alert-block alert-info">
+# <b>Improve: </b> "Improve" comments mean that there are tiny corrections that could help you to make your project better.
+# </div>
+# 
+# <div class="alert alert-block alert-danger">
+# <b>Needs fixing:</b> if the block requires some corrections. Work can't be accepted with the red comments.
+# </div>
+# 
+# ### <font color='orange'>General feedback</font>
+# * Thank you for sending your project. You've done a really good job on it!  
+# * Your project looks pretty good! I especially liked your work with data functions. .
+# * Also really liked your depth knowledge of machine learning models.
+# * Your project is a true "A". Congratulations!
+# * Good luck!
+# 
+# 
+
 # ## Project description
 
 # Rusty Bargain used car sales service is developing an app to attract new customers. In that app, you can quickly find out the market value of your car. You have access to historical data: technical specifications, trim versions, and prices. You need to build the model to determine the value. 
@@ -54,6 +79,10 @@ logger.setLevel(logging.CRITICAL)
 import timeit
 from functools import lru_cache
 
+
+# <div class="alert alert-block alert-success">
+# <b>Success:</b>  It is interesting that you use logging, I've never seen it before from students!
+# </div>
 
 # # 1. Data preparation
 
@@ -157,6 +186,10 @@ def show_feature_importances(df, features, target):
   return df_feature_importances
 
 
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> It's great that you logically divide the actions of the projects by functions!
+# 
+
 # In[4]:
 
 
@@ -214,6 +247,9 @@ df["LastSeen"] = pd.to_datetime(df["LastSeen"])
 df["NotRepaired"] = df["NotRepaired"].fillna('yes')
 df["NotRepaired"] = (df["NotRepaired"] == 'yes').astype('int')
 
+
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> there is no unambiguous solution, and since you reasoned your action, it can be considered correct.
 
 # In[12]:
 
@@ -280,6 +316,10 @@ df.isna().sum()
 describe_full(df, target_name=target)
 
 
+# <div class="alert alert-block alert-info">
+# <b>Improve: </b> It would be better if you removed unnecessary features from data.
+# </div>
+
 # # 2. Model training
 
 # let's use CV technics and 10% for a final test set. 
@@ -336,6 +376,10 @@ m_idx = {"catboost":0, "xgboost":1, "LGBM":2}
 # CatBoost
 
 # CatBoost by default could work with categorical data (that's why it's CatBoost;)) for others model, we gonna use just simple LabelEncoder for simplicity (in real case I believe need to think better, because some categorical data for sure is sensitive to order, in terms of the price for example)
+
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> Good job, great theoretical knowledge of machine learning models! 
+# 
 
 # In[22]:
 
@@ -542,9 +586,18 @@ log_metrics["rmse_cv"][m_idx["LGBM"]] = rmse_func(y_test, y_pred)
 print("{}".format(timeit.timeit()))
 
 
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> This step was done very well! <br>
+# Great that you used cross validation, and correctly measured the time of the models.
+# </div>
+
 # # 3. Model analysis
 
 # Let's check our results, first of all, I didn't show measure of time executions, because I used GPU on the couple models, and on the last one on the CPU. for sure time would be different (anyway time results are pretty the same)
+
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> Okay, got it.
+# </div>
 
 # In[40]:
 
@@ -559,6 +612,10 @@ pd.DataFrame(log_metrics)
 # Best result is on the XGBoost, and LGBM has weighted result in both cases
 # 
 # 
+
+# <div class="alert alert-block alert-success">
+# <b>Success:</b> The best RMSE value  satisfies the criterion, the work is great, well done!
+# </div>
 
 # ## Checklist
 
