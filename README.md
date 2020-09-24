@@ -2,6 +2,12 @@
 
 tasks and projects from the data science [course](https://practicum.yandex.com/profile/data-scientist/) by Yandex
 
+### Sprint #13
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/ya-praktikum/blob/master/sprint13/sprint13.ipynb)
+
+Sweet Lift Taxi company has collected historical data on taxi orders at airports. To attract more drivers during peak hours, we need to predict the amount of taxi orders for the next hour. Build a model for such a prediction.
+The RMSE metric on the test set should not be more than 48.
+
 ### Sprint #12
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/ya-praktikum/blob/master/sprint12/sprint12.ipynb)
 
