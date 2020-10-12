@@ -2,6 +2,11 @@
 
 tasks and projects from the data science [course](https://practicum.yandex.com/profile/data-scientist/) by Yandex
 
+### Sprint #14
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/ya-praktikum/blob/master/sprint14/sprint14.ipynb)
+
+The Film Junky Union, a new edgy community for classic movie enthusiasts, is developing a system for filtering and categorizing movie reviews. The goal is to train a model to automatically detect negative reviews. You'll be using a dataset of IMBD movie reviews with polarity labelling to build a model for classifying positive and negative reviews. It will need to reach an F1 score of at least 0.85.
+
 ### Sprint #13
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/ya-praktikum/blob/master/sprint13/sprint13.ipynb)
 
