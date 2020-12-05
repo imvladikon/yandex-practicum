@@ -2,8 +2,14 @@
 
 tasks and projects from the data science [course](https://practicum.yandex.com/profile/data-scientist/) by Yandex
 
+### Sprint Final project
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/ya-praktikum/blob/master/final/final_project.ipynb)
+The telecom operator Interconnect would like to be able to forecast their churn of clients. If it's discovered that a user is planning to leave, they will be offered promotional codes and special plan options. Interconnect's marketing team has collected some of their clientele's personal data, including information about their plans and contracts.
+
+
 ### Sprint #16 - Unsupervised Learning
 
+Theoretical parts and quizzes
 
 ### Sprint #15 - Computer Vision
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/ya-praktikum/blob/master/sprint15/sprint15.ipynb)
